@@ -10,14 +10,13 @@ export default function AddEvent() {
     location: "",
     description: "",
     category: "",
-    image: null,
+    image: null as File | null,
   })
 
   const [showSuccess, setShowSuccess] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
     console.log("Form submitted:", formData)
     setShowSuccess(true)
     setTimeout(() => setShowSuccess(false), 3000)
@@ -29,9 +28,8 @@ export default function AddEvent() {
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData((prev) => ({ ...prev, image: e.target.files![0] }))
-    }
+    const file = e.target.files?.[0] || null
+    setFormData((prev) => ({ ...prev, image: file }))
   }
 
   return (
@@ -132,13 +130,16 @@ export default function AddEvent() {
                 onChange={handleFileChange}
                 className="hidden"
                 accept="image/*"
+                aria-label="Upload event banner"
               />
               <label
                 htmlFor="image"
                 className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
               >
                 <ImageIcon className="h-5 w-5 mr-2 text-gray-400" />
-                <span className="text-gray-600">{formData.image ? formData.image.name : "Upload Image"}</span>
+                <span className="text-gray-600">
+                  {formData.image ? formData.image.name : "Upload Image"}
+                </span>
               </label>
             </div>
           </div>
@@ -156,4 +157,3 @@ export default function AddEvent() {
     </section>
   )
 }
-
