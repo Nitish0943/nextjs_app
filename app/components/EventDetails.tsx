@@ -1,7 +1,6 @@
-import { Calendar, MapPin, Bell } from "lucide-react"
+import { Calendar, MapPin, Bell } from "lucide-react";
 
-export default function EventDetails({ eventId }: { eventId: string }) {
-  // In a real application, you would fetch the event details using the eventId
+export default function EventDetails() {
   return (
     <section className="py-16 bg-gray-100">
       <div className="container mx-auto px-4">
@@ -33,6 +32,5 @@ export default function EventDetails({ eventId }: { eventId: string }) {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
